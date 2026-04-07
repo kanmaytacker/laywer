@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "db:up": "npx supabase start && npx supabase migration up --local",
+    "db:reset": "npx supabase db reset --local",
+    "db:new": "npx supabase migration new",
+    "db:push": "npx supabase db push",
+    "db:status": "npx supabase migration list --local",
+    "db:stop": "npx supabase stop"
+  },
+  "devDependencies": {
+    "supabase": "^2.76.14"
+  }
+}

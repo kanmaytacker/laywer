@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply m-0 bg-[#0f1115] text-[#e6ebf2] antialiased;
+    font-family: "Public Sans", "Inter", "Segoe UI", sans-serif;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #2a313c #0f141b;
+  }
+}
+
+@layer components {
+  .app-shell {
+    @apply min-h-screen bg-[#0f1115];
+  }
+
+  .app-grid {
+    @apply grid min-h-screen;
+    grid-template-columns: 236px minmax(0, 1fr);
+  }
+
+  .app-grid-collapsed {
+    grid-template-columns: 56px minmax(0, 1fr);
+  }
+
+  .main-shell {
+    @apply border-l border-[#1f242c] bg-[#111319];
+  }
+
+  .panel {
+    @apply rounded-2xl border border-[#242a33] bg-[#12161d] shadow-none;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-1.5 rounded-lg border border-[#303742] bg-[#181d25] px-3 py-1.5 text-sm font-medium text-[#dbe4f0] transition hover:border-[#3a4350] hover:bg-[#1d2430] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .btn-primary {
+    @apply border-[#2f7e5f] bg-[#1d3b2f] text-[#d7f4e5] hover:bg-[#224738];
+  }
+
+  .icon-btn {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg border border-transparent text-[#98a3b4] transition hover:border-[#303742] hover:bg-[#1a212c] hover:text-[#e7edf6];
+  }
+
+  .icon-danger {
+    @apply text-[#9ca6b7] hover:text-[#f0adad];
+  }
+
+  .input {
+    @apply w-full rounded-lg border border-[#2e3641] bg-[#131922] px-3 py-2 text-sm text-[#ebf1f8] outline-none transition placeholder:text-[#7f8b9f] focus:border-[#3f8f6b] focus:ring-1 focus:ring-[#3f8f6b];
+  }
+
+  .label {
+    @apply text-[11px] font-semibold uppercase tracking-[0.08em] text-[#8e99aa];
+  }
+
+  .tab-strip {
+    @apply inline-flex items-center gap-1 rounded-lg border border-[#2a303a] bg-[#141922] p-1;
+  }
+
+  .tab-btn {
+    @apply rounded-md px-3 py-1.5 text-sm text-[#9da9bb] transition hover:bg-[#1d2430] hover:text-[#e5ecf6];
+  }
+
+  .tab-btn-active {
+    @apply bg-[#252d39] text-[#f1f5fb];
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full border border-[#303844] bg-[#181f29] px-2.5 py-1 text-xs text-[#a3afc1] transition hover:bg-[#1d2531];
+  }
+
+  .chip-active {
+    @apply border-[#2f7e5f] bg-[#1d3b2f] text-[#d7f4e5];
+  }
+
+  .center-empty {
+    @apply flex min-h-[220px] flex-col items-center justify-center text-center;
+  }
+
+  .chat-shell {
+    @apply panel flex min-h-0 flex-1 flex-col overflow-hidden;
+  }
+
+  .chat-messages {
+    @apply min-h-0 flex-1 space-y-3 overflow-auto px-5 py-4;
+  }
+
+  .chat-row {
+    @apply flex;
+  }
+
+  .chat-row-user {
+    @apply justify-end;
+  }
+
+  .chat-bubble {
+    @apply max-w-[78%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-6;
+  }
+
+  .chat-bubble-ai {
+    @apply border border-[#29313d] bg-[#151b24] text-[#e7edf6];
+  }
+
+  .chat-bubble-user {
+    @apply border border-[#2f7e5f] bg-[#1d3b2f] text-[#edf9f3];
+  }
+
+  .chat-composer {
+    @apply border-t border-[#262d37] bg-[#131922] p-3;
+  }
+
+  .chat-input {
+    @apply input min-h-24 resize-none;
+  }
+
+  .chat-controls {
+    @apply mt-2 flex items-center justify-end gap-2;
+  }
+
+  .chat-dock {
+    @apply p-4;
+  }
+
+  .chat-dock-messages {
+    @apply mb-2 max-h-48 space-y-2 overflow-auto rounded-lg border border-[#2a313d] bg-[#141a23] p-3;
+  }
+
+  .chat-dock-compose {
+    @apply grid gap-2 md:grid-cols-[1fr_auto];
+  }
+
+  .sidebar-shell {
+    @apply flex min-h-screen flex-col border-r border-[#1f242c] bg-[#0d1015] px-3 py-3;
+  }
+
+  .sidebar-top {
+    @apply mb-5 flex items-center justify-between;
+  }
+
+  .brand {
+    @apply flex flex-1 items-center gap-2 rounded-lg px-2 py-2 text-left transition hover:bg-[#161c24];
+  }
+
+  .brand-collapsed {
+    @apply justify-center;
+  }
+
+  .brand-mark {
+    @apply inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[#303844] bg-[#161d27] text-sm font-semibold text-[#ecf1f8];
+  }
+
+  .brand-title {
+    @apply text-sm font-semibold tracking-wide text-[#f0f5fc];
+  }
+
+  .brand-subtitle {
+    @apply text-[11px] text-[#8591a3];
+  }
+
+  .sidebar-actions {
+    @apply mb-5 grid gap-2.5;
+  }
+
+  .sidebar-action-btn {
+    @apply inline-flex items-center gap-2 rounded-lg border border-[#2d3541] bg-[#151c26] px-3 py-2 text-sm text-[#dce4ef] transition hover:bg-[#1b2330];
+  }
+
+  .sidebar-group {
+    @apply mb-5;
+  }
+
+  .sidebar-grow {
+    @apply min-h-0 flex-1;
+  }
+
+  .sidebar-label {
+    @apply mb-2 px-1 text-[10px] font-semibold uppercase tracking-[0.1em] text-[#7d8999];
+  }
+
+  .sidebar-list {
+    @apply space-y-1;
+  }
+
+  .sidebar-scroll {
+    @apply max-h-[calc(100vh-420px)] overflow-auto pr-1;
+  }
+
+  .sidebar-scroll-sm {
+    @apply max-h-40 overflow-auto pr-1;
+  }
+
+  .sidebar-empty {
+    @apply px-2 py-2 text-xs text-[#7f8a9b];
+  }
+
+  .sidebar-row {
+    @apply inline-flex h-[38px] w-full items-center gap-2 rounded-lg px-2.5 py-2 text-left text-sm text-[#d4deea] transition hover:bg-[#1a212c];
+  }
+
+  .sidebar-row-active {
+    @apply bg-[#212a37] text-[#f1f6fd];
+  }
+
+  .sidebar-chat-row {
+    @apply flex items-center gap-1;
+  }
+
+  .sidebar-chat-row .sidebar-row {
+    @apply flex-1;
+  }
+
+  .collapsed-list {
+    @apply mt-2 flex flex-col items-center gap-2;
+  }
+}

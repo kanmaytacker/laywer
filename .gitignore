@@ -1,0 +1,19 @@
+__pycache__/
+.pytest_cache/
+.venv/
+storage/*.db
+storage/**/*.db
+storage/**/exports/*
+node_modules/
+frontend/node_modules/
+frontend/dist/
+.env
+.env.*
+!.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+supabase/.temp/
+*.log
+*.pid
+Started supabase local development setup.yaml

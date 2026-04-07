@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MatterDesk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Bitter:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <h1>MatterDesk</h1>
+          <p>Litigation Workspace</p>
+        </div>
+
+        <nav class="nav" id="navMenu">
+          <button class="nav-item active" data-view="dashboard">Dashboard</button>
+          <button class="nav-item" data-view="matters">Matters</button>
+          <button class="nav-item" data-view="documents">Documents</button>
+          <button class="nav-item" data-view="drafting">Drafting</button>
+          <button class="nav-item" data-view="search">Search</button>
+          <button class="nav-item" data-view="exports">Exports</button>
+          <button class="nav-item" data-view="audit">Audit</button>
+        </nav>
+
+        <div class="session-box">
+          <label for="userIdInput">Session User ID</label>
+          <div class="row">
+            <input id="userIdInput" type="number" min="1" value="1" />
+            <button id="loadBtn" class="btn btn-solid">Load</button>
+          </div>
+          <small>Use an existing user id from `/docs`.</small>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2 id="viewTitle">Dashboard</h2>
+            <p id="viewSubtitle">Overview of your active matter and outputs</p>
+          </div>
+          <div class="matter-chip" id="activeMatterChip">No active matter</div>
+        </header>
+
+        <section class="view active" id="view-dashboard">
+          <div class="kpi-grid">
+            <article class="kpi-card">
+              <h3>Total Matters</h3>
+              <p id="kpiMatters">0</p>
+            </article>
+            <article class="kpi-card">
+              <h3>Documents</h3>
+              <p id="kpiDocs">0</p>
+            </article>
+            <article class="kpi-card">
+              <h3>Artifacts</h3>
+              <p id="kpiArtifacts">0</p>
+            </article>
+            <article class="kpi-card">
+              <h3>Keywords</h3>
+              <p id="kpiKeywords">-</p>
+            </article>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>Recent Matters</h3>
+              <button class="btn" data-jump="matters">Open Matters</button>
+            </div>
+            <div id="recentMatters" class="list"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-matters">
+          <div class="split">
+            <div class="card">
+              <div class="card-head">
+                <h3>All Matters</h3>
+                <span class="badge" id="matterCount">0</span>
+              </div>
+              <div id="matterList" class="list tall"></div>
+            </div>
+
+            <form id="matterForm" class="card">
+              <h3>Create Matter</h3>
+              <input name="title" placeholder="Matter title" required />
+              <input name="forum" placeholder="Forum (GST/ITAT/NFAC)" required />
+              <input name="parties" placeholder="Parties" required />
+              <input name="ay_fy_period" placeholder="AY/FY/Period" />
+              <input name="sections" placeholder="Sections" />
+              <input name="counsel" placeholder="Counsel" />
+              <input name="stage" placeholder="Stage" />
+              <input name="internal_owner" placeholder="Internal owner" />
+              <button class="btn btn-solid" type="submit">Create Matter</button>
+            </form>
+          </div>
+        </section>
+
+        <section class="view" id="view-documents">
+          <div class="split">
+            <form id="docForm" class="card" enctype="multipart/form-data">
+              <h3>Upload Document</h3>
+              <input name="title" placeholder="Document title" required />
+              <select name="tag">
+                <option value="notice">Notice</option>
+                <option value="evidence">Evidence</option>
+                <option value="order">Order</option>
+                <option value="case-law">Case-law</option>
+                <option value="correspondence">Correspondence</option>
+              </select>
+              <input name="file" type="file" required />
+              <button class="btn btn-solid" type="submit">Upload to Active Matter</button>
+            </form>
+
+            <div class="card">
+              <div class="card-head">
+                <h3>Documents in Active Matter</h3>
+                <button id="refreshDocsBtn" class="btn">Refresh</button>
+              </div>
+              <div id="docList" class="list tall"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="view-drafting">
+          <div class="card">
+            <h3>Generate Litigation Work Product</h3>
+            <div class="actions">
+              <button class="btn" data-generate="brief">Matter Brief</button>
+              <button class="btn" data-generate="chronology">Chronology</button>
+              <button class="btn" data-generate="issues">Issue List</button>
+              <button class="btn" data-generate="draft">First Draft</button>
+              <button class="btn" data-generate="annexure_index">Annexure Index</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-head">
+              <h3>Generated Artifacts</h3>
+              <button id="refreshArtifactsBtn" class="btn">Refresh</button>
+            </div>
+            <div id="artifactList" class="list tall"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-search">
+          <form id="searchForm" class="card">
+            <h3>Search in Active Matter</h3>
+            <div class="row grow">
+              <input name="q" placeholder="Search phrase" required />
+              <button class="btn btn-solid" type="submit">Search</button>
+            </div>
+          </form>
+          <div class="card">
+            <h3>Results</h3>
+            <div id="searchResults" class="list tall"></div>
+          </div>
+        </section>
+
+        <section class="view" id="view-exports">
+          <div class="card">
+            <h3>Export Bundle</h3>
+            <p>Create final filing package for selected matter.</p>
+            <div class="actions">
+              <button id="exportBundleBtn" class="btn btn-solid">Download Filing Bundle (PDF)</button>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Artifact Exports</h3>
+            <p>Each artifact row in Drafting view includes DOCX export.</p>
+            <button class="btn" data-jump="drafting">Go to Drafting</button>
+          </div>
+        </section>
+
+        <section class="view" id="view-audit">
+          <div class="card">
+            <div class="card-head">
+              <h3>Audit Trail</h3>
+              <button id="refreshAuditBtn" class="btn">Refresh</button>
+            </div>
+            <div id="auditList" class="list tall"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="/static/app.js" defer></script>
+  </body>
+</html>
