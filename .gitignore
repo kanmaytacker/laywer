@@ -17,3 +17,4 @@ supabase/.temp/
 *.log
 *.pid
 Started supabase local development setup.yaml
+data/raw/
