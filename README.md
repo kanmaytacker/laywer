@@ -14,6 +14,8 @@ This repository includes:
 - Supabase for Auth, Postgres, Storage, and RLS
 - OpenAI for chat, summary, and embedding workflows
 
+For complete local bring-up instructions, see `LOCAL_SETUP.md`.
+
 ## 1) Architecture
 
 - Frontend authenticates users with Supabase Auth.
@@ -41,7 +43,7 @@ Install the following locally:
 1. Docker Desktop (required for local Supabase)
 2. Node.js 18+ and npm
 3. Python 3.10+
-4. Supabase CLI (or use `npx supabase` via npm scripts)
+4. Supabase CLI (invoked through `npm run db:*` scripts)
 
 Optional but recommended:
 
@@ -109,9 +111,11 @@ Migrations are the **single source of truth**.
 
 ```bash
 npm run db:up
+npm run db:clean
 npm run db:new -- add_case_indexes
 npm run db:reset
 npm run db:status
+npm run db:info
 npm run db:push
 npm run db:stop
 ```
@@ -119,9 +123,11 @@ npm run db:stop
 These commands map to:
 
 - `db:up` -> `supabase start && supabase migration up --local`
+- `db:clean` -> `supabase stop --no-backup && supabase start && supabase db reset --local`
 - `db:new` -> `supabase migration new <name>`
 - `db:reset` -> `supabase db reset --local`
 - `db:status` -> `supabase migration list --local`
+- `db:info` -> `supabase status` (local URLs + keys)
 - `db:push` -> `supabase db push`
 - `db:stop` -> `supabase stop`
 

@@ -1,10 +1,12 @@
 {
   "scripts": {
     "db:up": "npx supabase start && npx supabase migration up --local",
+    "db:clean": "npx supabase stop --no-backup && npx supabase start && npx supabase db reset --local",
     "db:reset": "npx supabase db reset --local",
     "db:new": "npx supabase migration new",
     "db:push": "npx supabase db push",
     "db:status": "npx supabase migration list --local",
+    "db:info": "npx supabase status",
     "db:stop": "npx supabase stop"
   },
   "devDependencies": {
